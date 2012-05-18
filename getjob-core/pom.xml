@@ -44,9 +44,9 @@
 			<type>apklib</type>
 		</dependency>
 		<dependency>
-			<groupId>com.google.android</groupId>
-			<artifactId>support-v4</artifactId>
-			<version>r7</version>
+			<groupId>com.a2devel.getjob</groupId>
+			<artifactId>getjob-dao</artifactId>
+			<version>1</version>
 		</dependency>
 	</dependencies>
 
