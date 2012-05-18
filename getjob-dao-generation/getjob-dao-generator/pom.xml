@@ -9,7 +9,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<schema.version>${project.version}</schema.version>
 		<schema.package>com.a2devel.getjob.dao</schema.package>
-		<schema.output>getjob-dao/src/main/java</schema.output>
+		<schema.output>${basedir}/../getjob-dao/src/main/java</schema.output>
 		<schema.mainClass>com.a2devel.getjob.dao.DaoGenerator</schema.mainClass>
 	</properties>
 	
@@ -43,8 +43,8 @@
 						<phase>compile</phase>
 						<configuration>
 							<tasks>
-								<delete dir="../${schema.output}" failonerror="false" />
-								<mkdir dir="../${schema.output}" />
+								<delete dir="${schema.output}" failonerror="false" />
+								<mkdir dir="${schema.output}" />
 							</tasks>
 						</configuration>
 						<goals>

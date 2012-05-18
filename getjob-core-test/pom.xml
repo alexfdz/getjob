@@ -9,8 +9,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<android.device>emulator</android.device>
 	</properties>
-
 
 	<pluginRepositories>
 
@@ -41,7 +41,7 @@
 			<groupId>com.a2devel.getjob</groupId>
 			<artifactId>getjob-core</artifactId>
 			<version>1.0.0</version>
-			<type>apklib</type>
+			<type>apk</type>
 		</dependency>
 		<dependency>
 			<groupId>com.a2devel.getjob</groupId>

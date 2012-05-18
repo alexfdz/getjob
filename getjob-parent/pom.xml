@@ -8,8 +8,8 @@
 
 
 	<modules>
+		<module>../getjob-dao-generation/</module>
 		<module>../getjob-core</module>
 		<module>../getjob-core-test</module>
-		<module>../getjob-dao-generation/</module>
 	</modules>
 </project>
