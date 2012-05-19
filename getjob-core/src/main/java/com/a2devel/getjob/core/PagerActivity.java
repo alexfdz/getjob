@@ -1,44 +1,66 @@
 package com.a2devel.getjob.core;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.a2devel.getjob.core.adapter.ListViewPagerAdapter;
-import com.a2devel.getjob.core.adapter.ScrollingTabsAdapter;
+import com.a2devel.getjob.dao.DaoMaster;
+import com.a2devel.getjob.dao.DaoMaster.DevOpenHelper;
+import com.a2devel.getjob.dao.DaoSession;
+import com.a2devel.getjob.dao.ResultDao;
+import com.a2devel.getjob.dao.SearchDao;
 import com.astuetz.viewpager.extensions.ScrollingTabsView;
-import com.astuetz.viewpager.extensions.TabsAdapter;
 
 public class PagerActivity extends Activity {
 	
-	private ViewPager mPager;
-	private ScrollingTabsView mScrollingTabs;
+	private ViewPager viewPager;
+	private ScrollingTabsView scrollingTabs;
 	
-	private PagerAdapter mPagerAdapter;
-	private TabsAdapter mScrollingTabsAdapter;
+	private ListViewPagerAdapter adapter;
 	
-	public static final String EXTRA_EXAMPLE_TYPE = "EXTRA_EXAMPLE_TYPE";
+    private ResultDao resultDao;
+    private SearchDao searchDao;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		this.initDataAccess();
 		
 		setContentView(R.layout.activity_scrolling_tabs);
-
-		mPager = (ViewPager) findViewById(R.id.pager);
-		mPagerAdapter = new ListViewPagerAdapter(this, mPager);
-		mPager.setAdapter(mPagerAdapter);
-		mPager.setCurrentItem(1);
-		mPager.setPageMargin(1);
+		adapter = new ListViewPagerAdapter(this);
 		
-		mScrollingTabs = (ScrollingTabsView) findViewById(R.id.scrolling_tabs);
-		mScrollingTabsAdapter = new ScrollingTabsAdapter(this);
-		mScrollingTabs.setAdapter(mScrollingTabsAdapter);
-		mScrollingTabs.setViewPager(mPager);
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager.setAdapter(adapter);
+		viewPager.setCurrentItem(1);
+		viewPager.setPageMargin(1);
 		
+		scrollingTabs = (ScrollingTabsView) findViewById(R.id.scrolling_tabs);
+		scrollingTabs.setAdapter(adapter);
+		scrollingTabs.setViewPager(viewPager);
 	}
 	
-	
+	private void initDataAccess() {
+		DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "greendao", null);
+		SQLiteDatabase database = null;
+		try {
+			database = helper.getWritableDatabase();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());//TODO
+		}
+		DaoMaster daoMaster = new DaoMaster(database);
+		DaoSession daoSession = daoMaster.newSession();
+		resultDao = daoSession.getResultDao();
+	    searchDao = daoSession.getSearchDao();
+	}
+
+	public ResultDao getResultDao() {
+		return resultDao;
+	}
+
+	public SearchDao getSearchDao() {
+		return searchDao;
+	}
 }

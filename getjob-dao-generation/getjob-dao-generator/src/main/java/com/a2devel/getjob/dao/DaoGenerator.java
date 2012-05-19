@@ -33,8 +33,8 @@ public class DaoGenerator {
         result.addStringProperty("text").notNull();
         result.addStringProperty("url").notNull();
         result.addDateProperty("timestamp").notNull();
-        result.addShortProperty("favorite");
-        result.addShortProperty("applied");
+        result.addIntProperty("favorite");
+        result.addIntProperty("applied");
         
         Property resultSearchId = result.addLongProperty("searchId").notNull().getProperty();
         ToOne resultToSearch = result.addToOne(search, resultSearchId);
