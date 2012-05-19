@@ -16,6 +16,7 @@ import com.a2devel.getjob.core.view.AppliedResultsView;
 import com.a2devel.getjob.core.view.FavoriteResultsView;
 import com.a2devel.getjob.core.view.ListViewWrapper;
 import com.a2devel.getjob.core.view.ResultsView;
+import com.a2devel.getjob.core.view.SearchsView;
 import com.astuetz.viewpager.extensions.TabsAdapter;
 
 
@@ -33,6 +34,7 @@ public class ListViewPagerAdapter extends PagerAdapter implements TabsAdapter {
 	private void createViews(){
 		viewsList = new ArrayList<ListViewWrapper>();
 		viewsList.add(new ResultsView(activity));
+		viewsList.add(new SearchsView(activity));
 		viewsList.add(new FavoriteResultsView(activity));
 		viewsList.add(new AppliedResultsView(activity));
 	}
@@ -44,7 +46,9 @@ public class ListViewPagerAdapter extends PagerAdapter implements TabsAdapter {
 		if(wrapper != null){
 			view = wrapper.getListView();
 		}
-		((ViewPager) container).addView(view, position);
+		if(view != null && view.getParent() == null){
+			((ViewPager) container).addView(view, position);
+		}
 		return view;
 	}
 	

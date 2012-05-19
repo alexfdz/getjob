@@ -7,5 +7,7 @@
     <string name="tab_results">Jobs</string>
     <string name="tab_applied">Applied</string>
     <string name="tab_favourites">Favorites</string>
-
+	<string name="tab_searchs">Searchs</string>
+    
+    
 </resources>

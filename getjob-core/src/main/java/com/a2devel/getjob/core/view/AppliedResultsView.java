@@ -19,7 +19,7 @@ public class AppliedResultsView extends ResultsView{
 	}
 	
 	protected List<Result> getItems(){
-		if(items == null){
+		if(items == null){//Show only applied items
 			items = getResultDao().queryBuilder().where(Properties.Applied.eq(0)).list();
 		}
 		return items;
